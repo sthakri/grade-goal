@@ -13,8 +13,16 @@ function computeGradedWork(categories) {
   return { banked, gradedWeight };
 }
 
+// Current average over graded work only (ungraded categories don't count
+// against you). Returns null when nothing is graded yet.
+function currentAverage(categories) {
+  const { banked, gradedWeight } = computeGradedWork(categories);
+  if (gradedWeight === 0) return null;
+  return banked / gradedWeight;
+}
+
 // Let the tests run under Node too (browsers get the globals for free
 // via the <script> tag in tests.html).
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { computeGradedWork };
+  module.exports = { computeGradedWork, currentAverage };
 }
