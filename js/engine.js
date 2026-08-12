@@ -21,8 +21,43 @@ function currentAverage(categories) {
   return banked / gradedWeight;
 }
 
+// The score you need on the final to finish the course at targetPct.
+//   needed        — required final-exam score
+//   guaranteedMin — course grade if you score 0 on the final
+//   maxPossible   — course grade if you score 100 on the final
+function requiredFinalScore(categories, finalWeight, targetPct) {
+  const { banked } = computeGradedWork(categories);
+  const needed = (100 * targetPct - banked) / finalWeight;
+  return {
+    needed,
+    guaranteedMin: banked / 100,
+    maxPossible: banked / 100 + finalWeight,
+  };
+}
+
+const fmt = (n) => Math.round(n * 10) / 10;
+
+function describeOutcome(result) {
+  if (result.needed > 100) {
+    return {
+      status: 'impossible',
+      message: `Not achievable — even a perfect final only gets you to ${fmt(result.maxPossible)}%.`,
+    };
+  }
+  if (result.needed <= 0) {
+    return {
+      status: 'locked-in',
+      message: `Already locked in — even a 0 on the final keeps you at ${fmt(result.guaranteedMin)}%.`,
+    };
+  }
+  return {
+    status: 'ok',
+    message: `You need ${fmt(result.needed)}% on the final.`,
+  };
+}
+
 // Let the tests run under Node too (browsers get the globals for free
 // via the <script> tag in tests.html).
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { computeGradedWork, currentAverage };
+  module.exports = { computeGradedWork, currentAverage, requiredFinalScore, describeOutcome };
 }
