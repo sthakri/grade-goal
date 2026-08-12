@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GradeGoal — engine tests</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 46rem; margin: 2rem auto; padding: 0 1rem; }
+    h1 { font-size: 1.3rem; }
+    #test-summary { font-size: 1.1rem; font-weight: 600; }
+    #test-summary.green { color: #15803d; }
+    #test-summary.red { color: #b91c1c; }
+    ul { list-style: none; padding: 0; }
+    li { padding: .35rem .6rem; border-radius: 6px; margin: .25rem 0; font-family: ui-monospace, monospace; font-size: .9rem; }
+    li.pass { background: #dcfce7; color: #14532d; }
+    li.fail { background: #fee2e2; color: #7f1d1d; }
+    p.hint { color: #555; font-size: .9rem; }
+  </style>
+</head>
+<body>
+  <h1>🧪 GradeGoal engine tests</h1>
+  <p class="hint">This page is the team's <em>“is it safe to merge?”</em> check. Every test must be
+  green before a branch may merge into <code>main</code> (rule 3 in CONTRIBUTING.md).
+  Terminal equivalent: <code>node tests/engine.test.js</code></p>
+  <p id="test-summary">running…</p>
+  <ul id="test-results"></ul>
+  <script src="js/engine.js"></script>
+  <script src="tests/engine.test.js"></script>
+</body>
+</html>
