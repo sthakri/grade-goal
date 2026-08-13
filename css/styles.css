@@ -17,10 +17,12 @@ body {
 .topbar h1 {
   margin: 0;
   font-size: 1.8rem;
+  letter-spacing: -0.02em;
 }
 .tagline {
   margin: 0.25rem 0 0;
   color: #475569;
+  font-style: italic;
 }
 
 .card {
@@ -45,10 +47,18 @@ input, select {
   background: #ffffff;
   color: inherit;
 }
-input:focus, select:focus {
+input:focus-visible, select:focus-visible, .ghost:focus-visible {
   outline: 2px solid #2563eb;
   outline-offset: 1px;
   border-color: #2563eb;
+}
+
+/* Keep number spinners from crowding narrow table cells. */
+input[type="number"] { -moz-appearance: textfield; }
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .target-row, .final-row {
