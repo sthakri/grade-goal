@@ -7,6 +7,8 @@ function computeGradedWork(categories) {
   let banked = 0;       // sum of weight × score, in course percent-points
   let gradedWeight = 0; // total weight that is already graded
   for (const c of categories) {
+    // Not graded yet — skip it instead of poisoning the math with null.
+    if (c.score === null || c.score === undefined || c.score === '') continue;
     banked += c.weight * c.score;
     gradedWeight += c.weight;
   }

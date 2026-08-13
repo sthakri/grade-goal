@@ -58,6 +58,16 @@
     assertClose(r.needed, 0);
   });
 
+  test('categories with ungraded scores are skipped', () => {
+    const r = computeGradedWork([
+      { name: 'Homework', weight: 20, score: 90 },
+      { name: 'Project', weight: 30, score: null },
+      { name: 'Lab', weight: 10, score: '' },
+    ]);
+    assertClose(r.banked, 1800);
+    assertClose(r.gradedWeight, 20);
+  });
+
   test('describeOutcome message includes the needed score', () => {
     const r = requiredFinalScore([{ name: 'Coursework', weight: 50, score: 80 }], 50, 70);
     assertTrue(describeOutcome(r).message.indexOf('60') !== -1, 'message should mention 60');
