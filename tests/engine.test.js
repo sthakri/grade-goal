@@ -73,6 +73,26 @@
     assertTrue(describeOutcome(r).message.indexOf('60') !== -1, 'message should mention 60');
   });
 
+  test('validation rejects weights above 100', () => {
+    const errors = validateInputs([{ name: 'Homework', weight: 150, score: 90 }], 50);
+    assertTrue(errors.length > 0);
+  });
+
+  test('validation rejects negative scores', () => {
+    const errors = validateInputs([{ name: 'Homework', weight: 20, score: -5 }], 50);
+    assertTrue(errors.length > 0);
+  });
+
+  test('validation rejects a zero final weight', () => {
+    const errors = validateInputs([{ name: 'Homework', weight: 20, score: 90 }], 0);
+    assertTrue(errors.length > 0);
+  });
+
+  test('validation passes for sane input', () => {
+    const errors = validateInputs([{ name: 'Homework', weight: 20, score: 90 }], 50);
+    assertEquals(errors.length, 0);
+  });
+
   // --------------------------------------------------------------- runner --
 
   const results = tests.map(({ name, fn }) => {

@@ -58,8 +58,27 @@ function describeOutcome(result) {
   };
 }
 
+// Validate user input before calculating. Returns an array of readable
+// error messages — an empty array means the input is safe to compute with.
+function validateInputs(categories, finalWeight) {
+  const errors = [];
+  for (const c of categories) {
+    if (!(c.weight > 0) || c.weight > 100) {
+      errors.push('“' + c.name + '”: weight must be between 0 and 100.');
+    }
+    if (c.score !== null && c.score !== undefined && c.score !== '' &&
+        (!(c.score >= 0) || c.score > 100)) {
+      errors.push('“' + c.name + '”: score must be between 0 and 100.');
+    }
+  }
+  if (!(finalWeight > 0) || finalWeight > 100) {
+    errors.push('Final exam weight must be between 0 and 100.');
+  }
+  return errors;
+}
+
 // Let the tests run under Node too (browsers get the globals for free
 // via the <script> tag in tests.html).
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { computeGradedWork, currentAverage, requiredFinalScore, describeOutcome };
+  module.exports = { computeGradedWork, currentAverage, requiredFinalScore, describeOutcome, validateInputs };
 }
