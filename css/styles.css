@@ -157,3 +157,23 @@ footer {
   padding: 1.5rem 1rem 2rem;
 }
 footer a { color: #2563eb; }
+
+/* Small screens: tighten the card and let the table scroll sideways
+   instead of squashing the inputs. */
+@media (max-width: 640px) {
+  .topbar { padding-top: 1rem; }
+  .topbar h1 { font-size: 1.5rem; }
+  .card {
+    margin: 0.5rem;
+    padding: 1rem;
+    border-radius: 10px;
+  }
+  .categories {
+    overflow-x: auto;
+  }
+  #category-table th,
+  #category-table td {
+    padding: 0.3rem 0.25rem;
+  }
+  .result .big { font-size: 1.35rem; }
+}
