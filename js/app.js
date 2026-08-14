@@ -83,7 +83,9 @@
     }
   });
 
-  rowsBody.addEventListener('change', update);
-  document.getElementById('final-weight').addEventListener('change', update);
+  // 'input' fires on every keystroke, so the answer updates as you type
+  // ('change' only fires when a field loses focus — feels broken).
+  rowsBody.addEventListener('input', update);
+  document.getElementById('final-weight').addEventListener('input', update);
   document.getElementById('target-grade').addEventListener('change', update);
 })();
