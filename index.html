@@ -6,6 +6,7 @@
   <title>GradeGoal — What do I need on my final?</title>
   <meta name="description" content="Find out the exact score you need on your final exam to hit your target grade.">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/scenarios.css">
 </head>
 <body>
   <header class="topbar">
@@ -68,10 +69,20 @@
     </section>
   </main>
 
+  <section class="scenarios card">
+    <h2>Saved scenarios</h2>
+    <div class="save-row">
+      <input type="text" id="scenario-name" placeholder="e.g. MATH 101, fall semester" maxlength="60" aria-label="Scenario name">
+      <button id="save-scenario">Save current</button>
+    </div>
+    <ul id="scenario-list" aria-label="Saved scenarios"></ul>
+  </section>
+
   <footer>
     <p>Built by a 4-person team as a git-workflow demo. <a href="WORKFLOW-GUIDE.md">See how we worked</a>.</p>
   </footer>
   <script src="js/engine.js"></script>
+  <script src="js/storage.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
