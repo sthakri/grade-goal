@@ -95,4 +95,59 @@
   rowsBody.addEventListener('input', update);
   document.getElementById('final-weight').addEventListener('input', update);
   document.getElementById('target-grade').addEventListener('change', update);
+
+  // ------------------------------------------------------ scenario saving --
+
+  const scenarioList = document.getElementById('scenario-list');
+  const scenarioName = document.getElementById('scenario-name');
+
+  function currentState() {
+    return {
+      categories: readCategories(),
+      finalWeight: readNumber('final-weight'),
+      target: readNumber('target-grade'),
+    };
+  }
+
+  function renderScenarioList() {
+    scenarioList.innerHTML = '';
+    for (const s of ScenarioStore.list()) {
+      const li = document.createElement('li');
+
+      const name = document.createElement('span');
+      name.className = 'name';
+      name.textContent = s.name;
+
+      const when = document.createElement('span');
+      when.className = 'when';
+      when.textContent = new Date(s.savedAt).toLocaleDateString();
+
+      const remove = document.createElement('button');
+      remove.className = 'remove-scenario';
+      remove.setAttribute('aria-label', 'Delete scenario');
+      remove.textContent = '✕';
+      remove.addEventListener('click', () => {
+        ScenarioStore.remove(s.name);
+        renderScenarioList();
+      });
+
+      li.append(name, when, remove);
+      scenarioList.appendChild(li);
+    }
+  }
+
+  document.getElementById('save-scenario').addEventListener('click', () => {
+    const name = scenarioName.value.trim();
+    if (!name) {
+      scenarioName.classList.add('invalid');
+      scenarioName.focus();
+      return;
+    }
+    scenarioName.classList.remove('invalid');
+    ScenarioStore.save(name, currentState());
+    scenarioName.value = '';
+    renderScenarioList();
+  });
+
+  renderScenarioList();
 })();
