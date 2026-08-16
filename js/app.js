@@ -36,14 +36,21 @@
   }
 
   function readCategories() {
-    return Array.from(rowsBody.querySelectorAll('tr')).map((tr) => {
-      const inputs = tr.querySelectorAll('input');
-      return {
-        name: inputs[0].value.trim() || 'Category',
-        weight: inputs[1].value === '' ? '' : Number(inputs[1].value),
-        score: inputs[2].value === '' ? '' : Number(inputs[2].value),
-      };
-    });
+    return Array.from(rowsBody.querySelectorAll('tr'))
+      .filter((tr) => {
+        // A freshly added, still-empty row is invisible to the engine —
+        // it must not trigger validation errors mid-typing.
+        const inputs = tr.querySelectorAll('input');
+        return inputs[0].value !== '' || inputs[1].value !== '' || inputs[2].value !== '';
+      })
+      .map((tr) => {
+        const inputs = tr.querySelectorAll('input');
+        return {
+          name: inputs[0].value.trim() || 'Category',
+          weight: inputs[1].value === '' ? '' : Number(inputs[1].value),
+          score: inputs[2].value === '' ? '' : Number(inputs[2].value),
+        };
+      });
   }
 
   function readNumber(id) {
