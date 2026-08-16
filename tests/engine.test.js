@@ -93,6 +93,16 @@
     assertEquals(errors.length, 0);
   });
 
+  test('regression: non-finite weights are skipped, not multiplied', () => {
+    const r = computeGradedWork([
+      { name: 'Homework', weight: 20, score: 90 },
+      { name: 'Ghost row', weight: undefined, score: 90 },
+      { name: 'Ghost row 2', weight: NaN, score: 90 },
+    ]);
+    assertClose(r.banked, 1800);
+    assertClose(r.gradedWeight, 20);
+  });
+
   // --------------------------------------------------------------- runner --
 
   const results = tests.map(({ name, fn }) => {
