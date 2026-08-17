@@ -26,6 +26,19 @@
 #scenario-list .name { font-weight: 600; flex: 1; }
 #scenario-list .when { color: var(--muted-2, #64748b); font-size: 0.8rem; }
 
+.load-scenario {
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-weight: 600;
+  flex: 1;
+  text-align: left;
+  cursor: pointer;
+  padding: 0.15rem 0;
+}
+.load-scenario:hover { color: var(--accent, #2563eb); text-decoration: underline; }
+
 .remove-scenario {
   border: none;
   background: none;

@@ -114,9 +114,11 @@
     for (const s of ScenarioStore.list()) {
       const li = document.createElement('li');
 
-      const name = document.createElement('span');
-      name.className = 'name';
+      const name = document.createElement('button');
+      name.className = 'load-scenario';
+      name.title = 'Load into the form';
       name.textContent = s.name;
+      name.addEventListener('click', () => loadScenario(s.name));
 
       const when = document.createElement('span');
       when.className = 'when';
@@ -134,6 +136,15 @@
       li.append(name, when, remove);
       scenarioList.appendChild(li);
     }
+  }
+
+  function loadScenario(name) {
+    const s = ScenarioStore.find(name);
+    if (!s) return;
+    renderRows(s.state.categories);
+    document.getElementById('final-weight').value = s.state.finalWeight;
+    document.getElementById('target-grade').value = String(s.state.target);
+    update();
   }
 
   document.getElementById('save-scenario').addEventListener('click', () => {
