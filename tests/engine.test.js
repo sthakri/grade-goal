@@ -25,8 +25,8 @@
 
   // ---------------------------------------------------------------- tests --
 
-  test('computeGradedWork sums weighted scores', () => {
-    const r = computeGradedWork([
+  test('gradedWork sums weighted scores', () => {
+    const r = gradedWork([
       { name: 'Homework', weight: 20, score: 90 },
       { name: 'Quizzes', weight: 10, score: 60 },
     ]);
@@ -59,7 +59,7 @@
   });
 
   test('categories with ungraded scores are skipped', () => {
-    const r = computeGradedWork([
+    const r = gradedWork([
       { name: 'Homework', weight: 20, score: 90 },
       { name: 'Project', weight: 30, score: null },
       { name: 'Lab', weight: 10, score: '' },
@@ -94,7 +94,7 @@
   });
 
   test('regression: non-finite weights are skipped, not multiplied', () => {
-    const r = computeGradedWork([
+    const r = gradedWork([
       { name: 'Homework', weight: 20, score: 90 },
       { name: 'Ghost row', weight: undefined, score: 90 },
       { name: 'Ghost row 2', weight: NaN, score: 90 },
