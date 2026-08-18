@@ -3,7 +3,7 @@
 //   weight — % of the total course grade (0–100)
 //   score  — your % score in that category (0–100)
 
-function computeGradedWork(categories) {
+function gradedWork(categories) {
   let banked = 0;       // sum of weight × score, in course percent-points
   let gradedWeight = 0; // total weight that is already graded
   for (const c of categories) {
@@ -20,7 +20,7 @@ function computeGradedWork(categories) {
 // Current average over graded work only (ungraded categories don't count
 // against you). Returns null when nothing is graded yet.
 function currentAverage(categories) {
-  const { banked, gradedWeight } = computeGradedWork(categories);
+  const { banked, gradedWeight } = gradedWork(categories);
   if (gradedWeight === 0) return null;
   return banked / gradedWeight;
 }
@@ -30,7 +30,7 @@ function currentAverage(categories) {
 //   guaranteedMin — course grade if you score 0 on the final
 //   maxPossible   — course grade if you score 100 on the final
 function requiredFinalScore(categories, finalWeight, targetPct) {
-  const { banked } = computeGradedWork(categories);
+  const { banked } = gradedWork(categories);
   const needed = (100 * targetPct - banked) / finalWeight;
   return {
     needed,
@@ -82,5 +82,5 @@ function validateInputs(categories, finalWeight) {
 // Let the tests run under Node too (browsers get the globals for free
 // via the <script> tag in tests.html).
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { computeGradedWork, currentAverage, requiredFinalScore, describeOutcome, validateInputs };
+  module.exports = { gradedWork, currentAverage, requiredFinalScore, describeOutcome, validateInputs };
 }
