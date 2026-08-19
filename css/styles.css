@@ -35,9 +35,23 @@ body {
 }
 
 .topbar {
+  position: relative;
   text-align: center;
   padding: 1.5rem 1rem 0.5rem;
 }
+
+.theme-toggle {
+  position: absolute;
+  top: 1.1rem;
+  right: max(1rem, calc((100% - 40rem) / 2));
+  font-size: 1.15rem;
+  line-height: 1;
+  padding: 0.35rem 0.55rem;
+  border: 1px solid var(--card-border);
+  border-radius: 999px;
+  background: var(--card-bg);
+}
+.theme-toggle:hover { border-color: var(--accent); }
 .topbar h1 {
   margin: 0;
   font-size: 1.8rem;
