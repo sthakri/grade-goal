@@ -211,3 +211,32 @@ footer a { color: var(--accent); }
   }
   .result .big { font-size: 1.35rem; }
 }
+
+/* Dark palette: one variable block overrides everything. The toggle in
+   the header sets data-theme="dark" on <html>; without it we inherit the
+   light tokens defined in :root above. */
+[data-theme="dark"] {
+  --bg: #0b1220;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --muted-2: #7d8ba1;
+  --card-bg: #131c2e;
+  --card-border: #24304a;
+  --accent: #60a5fa;
+  --input-bg: #0f1728;
+  --input-border: #33415580;
+  --row-line: #1c2740;
+  --result-bg: #172554;
+  --result-border: #1e40af;
+  --result-impossible-bg: #3f1d1d;
+  --result-impossible-border: #7f1d1d;
+  --result-locked-bg: #14301f;
+  --result-locked-border: #166534;
+  --danger: #f87171;
+  --danger-bg: #3f1d1d;
+  --shadow: rgba(0, 0, 0, 0.35);
+}
+
+/* Color-scheme tells the browser to render native controls (select,
+   number spinners, scrollbars) dark as well. */
+[data-theme="dark"] { color-scheme: dark; }
