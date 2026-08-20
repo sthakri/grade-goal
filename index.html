@@ -7,9 +7,20 @@
   <meta name="description" content="Find out the exact score you need on your final exam to hit your target grade.">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/scenarios.css">
+  <script>
+    // Set the theme before first paint so there is no light-mode flash.
+    // Saved choice wins; otherwise follow the system preference.
+    (function () {
+      var saved = localStorage.getItem('gradegoal.theme');
+      var dark = saved ? saved === 'dark'
+                       : window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (dark) document.documentElement.dataset.theme = 'dark';
+    })();
+  </script>
 </head>
 <body>
   <header class="topbar">
+    <button id="theme-toggle" class="theme-toggle" aria-pressed="false" title="Switch theme">🌙</button>
     <h1>🎯 GradeGoal</h1>
     <p class="tagline">What do I need on my final?</p>
   </header>

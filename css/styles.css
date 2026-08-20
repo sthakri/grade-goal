@@ -1,19 +1,57 @@
-/* GradeGoal base styles (light theme). */
+/* GradeGoal styles — theme-token edition.
+   All colors live in :root as custom properties so a palette swap (see the
+   upcoming dark theme) is just a variable override, not a rewrite. */
+
+:root {
+  --bg: #f1f5f9;
+  --text: #0f172a;
+  --muted: #475569;
+  --muted-2: #64748b;
+  --card-bg: #ffffff;
+  --card-border: #e2e8f0;
+  --accent: #2563eb;
+  --input-bg: #ffffff;
+  --input-border: #cbd5e1;
+  --row-line: #f1f5f9;
+  --result-bg: #eff6ff;
+  --result-border: #bfdbfe;
+  --result-impossible-bg: #fef2f2;
+  --result-impossible-border: #fecaca;
+  --result-locked-bg: #f0fdf4;
+  --result-locked-border: #bbf7d0;
+  --danger: #b91c1c;
+  --danger-bg: #fee2e2;
+  --shadow: rgba(15, 23, 42, 0.06);
+}
 
 * { box-sizing: border-box; }
 
 body {
   margin: 0;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  background: #f1f5f9;
-  color: #0f172a;
+  background: var(--bg);
+  color: var(--text);
   line-height: 1.5;
 }
 
 .topbar {
+  position: relative;
   text-align: center;
   padding: 1.5rem 1rem 0.5rem;
 }
+
+.theme-toggle {
+  position: absolute;
+  top: 1.1rem;
+  right: max(1rem, calc((100% - 40rem) / 2));
+  font-size: 1.15rem;
+  line-height: 1;
+  padding: 0.35rem 0.55rem;
+  border: 1px solid var(--card-border);
+  border-radius: 999px;
+  background: var(--card-bg);
+}
+.theme-toggle:hover { border-color: var(--accent); }
 .topbar h1 {
   margin: 0;
   font-size: 1.8rem;
@@ -21,7 +59,7 @@ body {
 }
 .tagline {
   margin: 0.25rem 0 0;
-  color: #475569;
+  color: var(--muted);
   font-style: italic;
 }
 
@@ -29,10 +67,10 @@ body {
   max-width: 40rem;
   margin: 1rem auto;
   padding: 1.5rem;
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   border-radius: 12px;
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+  box-shadow: 0 1px 3px var(--shadow);
 }
 
 label {
@@ -42,15 +80,15 @@ label {
 input, select {
   font: inherit;
   padding: 0.45rem 0.6rem;
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--input-border);
   border-radius: 8px;
-  background: #ffffff;
+  background: var(--input-bg);
   color: inherit;
 }
 input:focus-visible, select:focus-visible, .ghost:focus-visible {
-  outline: 2px solid #2563eb;
+  outline: 2px solid var(--accent);
   outline-offset: 1px;
-  border-color: #2563eb;
+  border-color: var(--accent);
 }
 
 /* Keep number spinners from crowding narrow table cells. */
@@ -85,13 +123,13 @@ input[type="number"]::-webkit-inner-spin-button {
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: #64748b;
+  color: var(--muted-2);
   padding: 0.35rem 0.4rem;
-  border-bottom: 2px solid #e2e8f0;
+  border-bottom: 2px solid var(--card-border);
 }
 #category-table td {
   padding: 0.35rem 0.4rem;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid var(--row-line);
 }
 #category-table input {
   width: 100%;
@@ -111,8 +149,8 @@ input[type="number"]::-webkit-inner-spin-button {
   border-radius: 6px;
 }
 .remove-row:hover {
-  background: #fee2e2;
-  color: #b91c1c;
+  background: var(--danger-bg);
+  color: var(--danger);
 }
 
 button {
@@ -125,25 +163,25 @@ button {
   background: none;
   border: 1px dashed #94a3b8;
   border-radius: 8px;
-  color: #475569;
+  color: var(--muted);
 }
 .ghost:hover {
-  border-color: #2563eb;
-  color: #2563eb;
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .result {
   margin-top: 1.25rem;
   padding: 1rem;
   border-radius: 10px;
-  background: #eff6ff;
-  border: 1px solid #bfdbfe;
+  background: var(--result-bg);
+  border: 1px solid var(--result-border);
   font-size: 1.05rem;
   text-align: center;
 }
 .result .placeholder {
   margin: 0;
-  color: #64748b;
+  color: var(--muted-2);
   font-size: 0.95rem;
 }
 .result .big {
@@ -151,10 +189,10 @@ button {
   font-weight: 700;
   display: block;
 }
-.result.impossible { background: #fef2f2; border-color: #fecaca; }
-.result.locked-in { background: #f0fdf4; border-color: #bbf7d0; }
+.result.impossible { background: var(--result-impossible-bg); border-color: var(--result-impossible-border); }
+.result.locked-in { background: var(--result-locked-bg); border-color: var(--result-locked-border); }
 .result .error {
-  color: #b91c1c;
+  color: var(--danger);
   font-size: 0.9rem;
   text-align: left;
   margin: 0.25rem 0 0;
@@ -162,11 +200,11 @@ button {
 
 footer {
   text-align: center;
-  color: #64748b;
+  color: var(--muted-2);
   font-size: 0.85rem;
   padding: 1.5rem 1rem 2rem;
 }
-footer a { color: #2563eb; }
+footer a { color: var(--accent); }
 
 /* Small screens: tighten the card and let the table scroll sideways
    instead of squashing the inputs. */
@@ -187,3 +225,32 @@ footer a { color: #2563eb; }
   }
   .result .big { font-size: 1.35rem; }
 }
+
+/* Dark palette: one variable block overrides everything. The toggle in
+   the header sets data-theme="dark" on <html>; without it we inherit the
+   light tokens defined in :root above. */
+[data-theme="dark"] {
+  --bg: #0b1220;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --muted-2: #7d8ba1;
+  --card-bg: #131c2e;
+  --card-border: #24304a;
+  --accent: #60a5fa;
+  --input-bg: #0f1728;
+  --input-border: #33415580;
+  --row-line: #1c2740;
+  --result-bg: #172554;
+  --result-border: #1e40af;
+  --result-impossible-bg: #3f1d1d;
+  --result-impossible-border: #7f1d1d;
+  --result-locked-bg: #14301f;
+  --result-locked-border: #166534;
+  --danger: #f87171;
+  --danger-bg: #3f1d1d;
+  --shadow: rgba(0, 0, 0, 0.35);
+}
+
+/* Color-scheme tells the browser to render native controls (select,
+   number spinners, scrollbars) dark as well. */
+[data-theme="dark"] { color-scheme: dark; }

@@ -161,4 +161,25 @@
   });
 
   renderScenarioList();
+
+  // ------------------------------------------------------------- theming --
+
+  const themeToggle = document.getElementById('theme-toggle');
+
+  function syncThemeToggle() {
+    const dark = document.documentElement.dataset.theme === 'dark';
+    themeToggle.textContent = dark ? '☀️' : '🌙';
+    themeToggle.setAttribute('aria-pressed', String(dark));
+    themeToggle.title = dark ? 'Switch to light theme' : 'Switch to dark theme';
+  }
+
+  themeToggle.addEventListener('click', () => {
+    const dark = document.documentElement.dataset.theme === 'dark';
+    if (dark) delete document.documentElement.dataset.theme;
+    else document.documentElement.dataset.theme = 'dark';
+    localStorage.setItem('gradegoal.theme', dark ? 'light' : 'dark');
+    syncThemeToggle();
+  });
+
+  syncThemeToggle();
 })();
